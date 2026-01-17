@@ -1,6 +1,7 @@
 package com.neusoft.elm.dao.impl;
 
 import com.neusoft.elm.po.Admin;
+import com.neusoft.elm.utils.ConsoleUi;
 import com.neusoft.elm.utils.DBUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,7 +24,7 @@ public class AdminDao {
                 }
             }
         } catch (Exception ex) {
-            System.out.println("管理员登录异常: " + ex.getMessage());
+            System.out.println(ConsoleUi.error("管理员登录异常: " + ex.getMessage()));
         }
         return null;
     }

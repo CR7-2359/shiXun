@@ -1,6 +1,7 @@
 package com.neusoft.elm.dao.impl;
 
 import com.neusoft.elm.po.Business;
+import com.neusoft.elm.utils.ConsoleUi;
 import com.neusoft.elm.utils.DBUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -21,7 +22,7 @@ public class BusinessDao {
                 }
             }
         } catch (Exception ex) {
-            System.out.println("商家登录异常: " + ex.getMessage());
+            System.out.println(ConsoleUi.error("商家登录异常: " + ex.getMessage()));
         }
         return null;
     }
@@ -37,7 +38,7 @@ public class BusinessDao {
                 }
             }
         } catch (Exception ex) {
-            System.out.println("查询商家信息异常: " + ex.getMessage());
+            System.out.println(ConsoleUi.error("查询商家信息异常: " + ex.getMessage()));
         }
         return null;
     }
@@ -52,7 +53,7 @@ public class BusinessDao {
                 list.add(mapBusiness(rs));
             }
         } catch (Exception ex) {
-            System.out.println("查询商家列表异常: " + ex.getMessage());
+            System.out.println(ConsoleUi.error("查询商家列表异常: " + ex.getMessage()));
         }
         return list;
     }
@@ -69,7 +70,7 @@ public class BusinessDao {
                 }
             }
         } catch (Exception ex) {
-            System.out.println("搜索商家异常: " + ex.getMessage());
+            System.out.println(ConsoleUi.error("搜索商家异常: " + ex.getMessage()));
         }
         return list;
     }
@@ -87,7 +88,7 @@ public class BusinessDao {
             stmt.setString(6, business.getDescription());
             return stmt.executeUpdate() > 0;
         } catch (Exception ex) {
-            System.out.println("新增商家异常: " + ex.getMessage());
+            System.out.println(ConsoleUi.error("新增商家异常: " + ex.getMessage()));
         }
         return false;
     }
@@ -99,7 +100,7 @@ public class BusinessDao {
             stmt.setInt(1, id);
             return stmt.executeUpdate() > 0;
         } catch (Exception ex) {
-            System.out.println("删除商家异常: " + ex.getMessage());
+            System.out.println(ConsoleUi.error("删除商家异常: " + ex.getMessage()));
         }
         return false;
     }
@@ -116,7 +117,7 @@ public class BusinessDao {
             stmt.setInt(5, business.getId());
             return stmt.executeUpdate() > 0;
         } catch (Exception ex) {
-            System.out.println("修改商家信息异常: " + ex.getMessage());
+            System.out.println(ConsoleUi.error("修改商家信息异常: " + ex.getMessage()));
         }
         return false;
     }
@@ -130,7 +131,7 @@ public class BusinessDao {
             stmt.setString(3, oldPassword);
             return stmt.executeUpdate() > 0;
         } catch (Exception ex) {
-            System.out.println("修改商家密码异常: " + ex.getMessage());
+            System.out.println(ConsoleUi.error("修改商家密码异常: " + ex.getMessage()));
         }
         return false;
     }

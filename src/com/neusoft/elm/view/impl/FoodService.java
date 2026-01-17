@@ -2,6 +2,7 @@ package com.neusoft.elm.view.impl;
 
 import com.neusoft.elm.dao.impl.FoodDao;
 import com.neusoft.elm.po.Food;
+import com.neusoft.elm.utils.ConsoleUi;
 import com.neusoft.elm.utils.CsvUtil;
 import com.neusoft.elm.utils.InputUtil;
 import java.math.BigDecimal;
@@ -15,9 +16,10 @@ public class FoodService {
     public void listFoods(int businessId) {
         List<Food> foods = foodDao.listByBusinessId(businessId);
         if (foods.isEmpty()) {
-            System.out.println("暂无数据。");
+            System.out.println(ConsoleUi.info("暂无数据。"));
             return;
         }
+        System.out.println(ConsoleUi.label(ConsoleUi.ICON_FOOD, "食品列表"));
         System.out.printf("%-5s %-20s %-8s %-6s %-20s%n",
                 "编号", "名称", "价格", "状态", "描述");
         for (Food food : foods) {
@@ -44,14 +46,14 @@ public class FoodService {
         food.setStatus(status);
 
         boolean ok = foodDao.add(food);
-        System.out.println(ok ? "食品新增成功。" : "食品新增失败。");
+        System.out.println(ok ? ConsoleUi.success("食品新增成功。") : ConsoleUi.error("食品新增失败。"));
     }
 
     public void updateFood(int businessId) {
         int id = InputUtil.readInt("要修改的食品编号: ");
         Food food = foodDao.getByIdForBusiness(businessId, id);
         if (food == null) {
-            System.out.println("暂无数据。");
+            System.out.println(ConsoleUi.info("暂无数据。"));
             return;
         }
         String name = InputUtil.readLine("名称(回车保留): ");
@@ -66,7 +68,7 @@ public class FoodService {
             try {
                 food.setPrice(new BigDecimal(priceText));
             } catch (NumberFormatException ex) {
-                System.out.println("价格输入无效。");
+                System.out.println(ConsoleUi.warn("价格输入无效。"));
                 return;
             }
         }
@@ -77,19 +79,19 @@ public class FoodService {
             try {
                 food.setStatus(Integer.parseInt(statusText));
             } catch (NumberFormatException ex) {
-                System.out.println("状态输入无效。");
+                System.out.println(ConsoleUi.warn("状态输入无效。"));
                 return;
             }
         }
 
         boolean ok = foodDao.update(food);
-        System.out.println(ok ? "食品修改成功。" : "食品修改失败。");
+        System.out.println(ok ? ConsoleUi.success("食品修改成功。") : ConsoleUi.error("食品修改失败。"));
     }
 
     public void deleteFood(int businessId) {
         int id = InputUtil.readInt("要删除的食品编号: ");
         boolean ok = foodDao.deleteByIdForBusiness(businessId, id);
-        System.out.println(ok ? "食品删除成功。" : "食品删除失败。");
+        System.out.println(ok ? ConsoleUi.success("食品删除成功。") : ConsoleUi.error("食品删除失败。"));
     }
 
     public void exportFoods(int businessId) {
@@ -113,9 +115,9 @@ public class FoodService {
         }
         try {
             CsvUtil.writeCsv(Path.of(filePath), rows);
-            System.out.println("导出成功: " + filePath);
+            System.out.println(ConsoleUi.success("导出成功: " + filePath));
         } catch (Exception ex) {
-            System.out.println("导出失败: " + ex.getMessage());
+            System.out.println(ConsoleUi.error("导出失败: " + ex.getMessage()));
         }
     }
 }

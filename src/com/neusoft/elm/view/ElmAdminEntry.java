@@ -1,5 +1,6 @@
 package com.neusoft.elm.view;
 
+import com.neusoft.elm.utils.ConsoleUi;
 import com.neusoft.elm.view.impl.AdminView;
 
 public class ElmAdminEntry {
@@ -9,9 +10,7 @@ public class ElmAdminEntry {
     }
 
     private static void printBanner() {
-        System.out.println("饿了么商家后台 - 管理员端");
-        System.out.println("学号姓名: 202408764423LiuXuhui");
-        System.out.println("--------------------------------");
+        ConsoleUi.printBanner("饿了么商家后台 - 管理员端", "学号姓名: 202408764423LiuXuhui");
     }
 
 }

@@ -1,6 +1,7 @@
 package com.neusoft.elm.dao.impl;
 
 import com.neusoft.elm.po.Food;
+import com.neusoft.elm.utils.ConsoleUi;
 import com.neusoft.elm.utils.DBUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -21,7 +22,7 @@ public class FoodDao {
                 }
             }
         } catch (Exception ex) {
-            System.out.println("查询食品列表异常: " + ex.getMessage());
+            System.out.println(ConsoleUi.error("查询食品列表异常: " + ex.getMessage()));
         }
         return list;
     }
@@ -38,7 +39,7 @@ public class FoodDao {
                 }
             }
         } catch (Exception ex) {
-            System.out.println("查询食品信息异常: " + ex.getMessage());
+            System.out.println(ConsoleUi.error("查询食品信息异常: " + ex.getMessage()));
         }
         return null;
     }
@@ -55,7 +56,7 @@ public class FoodDao {
             stmt.setInt(5, food.getStatus());
             return stmt.executeUpdate() > 0;
         } catch (Exception ex) {
-            System.out.println("新增食品异常: " + ex.getMessage());
+            System.out.println(ConsoleUi.error("新增食品异常: " + ex.getMessage()));
         }
         return false;
     }
@@ -73,7 +74,7 @@ public class FoodDao {
             stmt.setInt(6, food.getBusinessId());
             return stmt.executeUpdate() > 0;
         } catch (Exception ex) {
-            System.out.println("修改食品异常: " + ex.getMessage());
+            System.out.println(ConsoleUi.error("修改食品异常: " + ex.getMessage()));
         }
         return false;
     }
@@ -86,7 +87,7 @@ public class FoodDao {
             stmt.setInt(2, foodId);
             return stmt.executeUpdate() > 0;
         } catch (Exception ex) {
-            System.out.println("删除食品异常: " + ex.getMessage());
+            System.out.println(ConsoleUi.error("删除食品异常: " + ex.getMessage()));
         }
         return false;
     }

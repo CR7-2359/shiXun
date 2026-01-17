@@ -10,7 +10,7 @@ public final class InputUtil {
     }
 
     public static String readLine(String prompt) {
-        System.out.print(prompt);
+        System.out.print(ConsoleUi.prompt(prompt));
         return SCANNER.nextLine().trim();
     }
 
@@ -20,7 +20,7 @@ public final class InputUtil {
             try {
                 return Integer.parseInt(text);
             } catch (NumberFormatException ex) {
-                System.out.println("输入无效，请输入数字。");
+                System.out.println(ConsoleUi.warn("输入无效，请输入数字。"));
             }
         }
     }
@@ -31,7 +31,7 @@ public final class InputUtil {
             try {
                 return new BigDecimal(text);
             } catch (NumberFormatException ex) {
-                System.out.println("输入无效，请输入数字。");
+                System.out.println(ConsoleUi.warn("输入无效，请输入数字。"));
             }
         }
     }
