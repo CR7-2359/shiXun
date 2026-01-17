@@ -4,4 +4,6 @@
 !src/**/*
 !elm_admin.sql
 !README.md
+!*.md
+!**/*.md
 !.gitignore
