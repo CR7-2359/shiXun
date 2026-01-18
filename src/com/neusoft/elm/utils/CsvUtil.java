@@ -14,6 +14,10 @@ public final class CsvUtil {
 
     /* Write rows to CSV using UTF-8 with BOM */
     public static void writeCsv(Path path, List<String[]> rows) throws IOException {
+        Path parent = path.getParent();
+        if (parent != null) {
+            Files.createDirectories(parent);
+        }
         try (BufferedWriter writer = Files.newBufferedWriter(path, StandardCharsets.UTF_8)) {
             writer.write('\uFEFF'); // UTF-8 BOM for Excel
             for (String[] row : rows) {

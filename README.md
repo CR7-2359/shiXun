@@ -3,6 +3,33 @@
 本项目是控制台版商家后台系统，包含管理员端与商家端。
 支持登录、商家管理、食品管理与 CSV 导出。
 
+## 运行环境
+- JDK 8+
+- MySQL 8+（推荐）
+- JDBC 驱动：`lib/mysql-connector-j-8.3.0.jar`
+
+## 快速开始
+1. 创建并初始化数据库：执行 `elm_admin.sql`。
+2. 修改数据库配置：编辑 `src/com/neusoft/elm/utils/DBUtil.java` 中的 URL/账号/密码。
+3. 运行入口：
+   - 管理员端：`com.neusoft.elm.view.ElmAdminEntry`
+   - 商家端：`com.neusoft.elm.view.ElmBusinessEntry`
+   - 统一入口：`com.neusoft.elm.view.Main`
+
+### 命令行编译/运行（可选）
+```bash
+# macOS/Linux
+javac -encoding UTF-8 -cp "lib/mysql-connector-j-8.3.0.jar" -d out $(find src -name "*.java")
+java -cp "out:lib/mysql-connector-j-8.3.0.jar" com.neusoft.elm.view.Main
+```
+
+```powershell
+# Windows PowerShell
+$files = Get-ChildItem -Recurse -Filter *.java src | ForEach-Object { $_.FullName }
+javac -encoding UTF-8 -cp "lib/mysql-connector-j-8.3.0.jar" -d out $files
+java -cp "out;lib/mysql-connector-j-8.3.0.jar" com.neusoft.elm.view.Main
+```
+
 ## 功能概览
 - 管理员登录
 - 商家登录
@@ -10,6 +37,12 @@
 - 商家：查看/修改商家信息、更新密码
 - 商家：查看/新增/修改/删除食品
 - CSV 导出（管理员导出商家列表，商家导出食品列表，输出到 `csvData/`）
+
+## 目录说明
+- `src/`：源码
+- `lib/`：依赖库（MySQL JDBC）
+- `csvData/`：CSV 导出目录
+- `out/`：编译输出目录
 
 ## 代码结构（核心代码）
 
@@ -192,8 +225,6 @@ CREATE TABLE food (
 );
 ```
 
-## 运行入口
-- 管理员端：`com.neusoft.elm.view.ElmAdminEntry`
-- 商家端：`com.neusoft.elm.view.ElmBusinessEntry`
-- 统一入口：`com.neusoft.elm.view.Main`
-
+## 注意事项
+- CSV 导出默认写入 `csvData/`，若没有则自动创建，Idea若导出后没用请刷新。
+- JDBC URL 使用 `characterEncoding=utf8` 与 `serverTimezone=UTC`，如需可自行调整。
